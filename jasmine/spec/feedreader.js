@@ -53,27 +53,50 @@ $(function() {
             // For all feeds in allFeeds
             expect(feed.name).toBeDefined;
             // There is an expectation that each feed's name is defined
-            expect(feed.name.length).notToBe(0);
+            expect(feed.name.length).not.toBe(0);
             /* There is also an expectation that each feed's name is not
-            zero (0)
+            zero (0) */
           }
-        }
-    });
-
+        });
 
     /* TODO: Write a new test suite named "The menu" */
+      describe('The menu', function() {
 
-        /* TODO: Write a test that ensures the menu element is
+        /* Done: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+        it('is hidden', function() {
+          // Start of the 'is hidden' spec
+              const body = document.querySelector('body');
+              // Selects the body and stores it in the const body
+              expect(body.classList.contains('menu-hidden')).toBe(true);
+              /* There is an expectation that the const body's classList
+              contains the class 'menu-hidden'*/
+          });
 
-         /* TODO: Write a test that ensures the menu changes
+         /* Done: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+         it('toggles on and off', function() {
+            const body = document.querySelector('body');
+            // Selects the body and stores it in the const body
+            const menu = document.querySelector('.menu-icon-link');
+            // Selects the menu and stores it in the const menu
+
+            menu.click(); // Calls the click method
+            expect(body.classList.contains('menu-hidden')).toBe(false);
+            /* There is an expectation that the menu is not hidden
+            after it is clicked*/
+
+            menu.click(); // Calls the click method
+            expect(body.classList.contains('menu-hidden')).toBe(true);
+             /* There is also an expectation that the menu is hidden
+            after it is clicked again */
+         });
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
@@ -90,4 +113,6 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-}());
+    });
+  });
+});

@@ -59,7 +59,7 @@ $(function() {
           }
         });
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* Done: Write a new test suite named "The menu" */
       describe('The menu', function() {
 
         /* Done: Write a test that ensures the menu element is
@@ -98,21 +98,52 @@ $(function() {
             after it is clicked again */
          });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
-
-        /* TODO: Write a test that ensures when the loadFeed
+    /* Done:Write a new test suite named "Initial Entries" */
+         describe('Initial Entries', function() {
+        /* Done: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-
-    /* TODO: Write a new test suite named "New Feed Selection" */
-
-        /* TODO: Write a test that ensures when a new feed is loaded
+          /* Uses beforeEach to check if there is at least one (1) element in loadFeed */
+          beforeEach(function(done) {
+              loadFeed(0, done);
+          });
+          it('completes work', function() {
+          // Start of 'completes work' spec
+              const feed = document.querySelector('.feed');
+              // Selects the feed from the body and holds it in the const feed
+              expect(feed.children.length > 0).toBe(true);
+              /* There is an expectation that feed children's length is greater than zero (0) */
+          });
+    /* Done: Write a new test suite named "New Feed Selection" */
+        describe('New Feed Selection', function() {
+        const feed = document.querySelector('.feed');
+        // Selects the feed and stores it in a const of the same name
+        const firstFeed = [];
+        // Declares firstFeed to be an empty array
+          beforeEach(function(done) {
+              loadFeed(0); // Loads the first feed
+              Array.from(feed.children).forEach(function(entry) {
+              // From each feed child, push entry into the array firstFeed
+                    firstFeed.push(entry.innerHTML);
+               });
+              loadFeed(1, done); // Loads the second feed
+          });
+        it('content changes', function() {
+            Array.from(feed.children).forEach(function(entry, index) {
+            // For each feed child,
+                expect(entry.innerText === firstFeed[index]).toBe(false);
+                // There is an expectation that the conditional statement above is false, which means the content is different
+            });
+         });
+        /* done: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        });
+        });
     });
   });
 });
